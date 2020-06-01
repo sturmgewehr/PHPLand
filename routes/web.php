@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'admin/blog', 'namespace' => 'Blog\Admin'], function () {
+    Route::resource('categories', 'CategoryController')
+        ->except(['show'])
+        ->names('blog.admin.categories');
+});
