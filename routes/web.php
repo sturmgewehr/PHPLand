@@ -22,3 +22,7 @@ Route::group(['prefix' => 'admin/blog', 'namespace' => 'Blog\Admin'], function (
         ->except(['show'])
         ->names('blog.admin.categories');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
