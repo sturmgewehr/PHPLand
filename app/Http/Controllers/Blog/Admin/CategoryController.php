@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Blog\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BlogCategory;
 use App\Repositories\BlogCategoryRepository;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        dd(__METHOD__);
+        $categoryList = $this->blogCategoryRepository->getForComboBox();
+
+        return view('blog.admin.categories.create', compact('categoryList'));
     }
 
     /**
@@ -47,7 +50,20 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        dd(__METHOD__);
+//        dd($request, __METHOD__);
+        $data = $request->input();
+
+        $item = BlogCategory::create($data);
+
+        if($item)
+        {
+            return redirect()->route('blog.admin.categories.create')
+                ->with(['success' => 'Успешно сохранено']);
+        } else
+        {
+            return back()->withErrors(['msg' => 'Ошибка сохранения'])
+                ->withInput();
+        }
     }
 
     /**
