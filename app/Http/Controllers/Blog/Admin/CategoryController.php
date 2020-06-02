@@ -26,7 +26,7 @@ class CategoryController extends Controller
     public function index()
     {
         $paginator = $this->blogCategoryRepository->getAllWithPaginate(5);
-//        return view('blog.admin.categories.index', compact($paginator));
+        return view('blog.admin.categories.index', compact('paginator'));
     }
 
     /**
