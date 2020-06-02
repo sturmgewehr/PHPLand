@@ -1,0 +1,11 @@
+.custom-bg-dark {
+	background-color: #0C1013;
+}
+.custom-shadow {
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+}
+/* TEMP CLASS */
+.dummy {
+	background-color: #7F7F7F;
+	height: 2000px;
+}

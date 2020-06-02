@@ -55,6 +55,7 @@ class CategoryController extends Controller
         $data = $request->input();
 
         $item = BlogCategory::create($data);
+        
 
         if($item)
         {
