@@ -38,9 +38,10 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $item = new BlogCategory();
         $categoryList = $this->blogCategoryRepository->getForComboBox();
 
-        return view('blog.admin.categories.create', compact('categoryList'));
+        return view('blog.admin.categories.create', compact(['item', 'categoryList']));
     }
 
     /**
@@ -87,7 +88,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        dd(__METHOD__);
+        $item = BlogCategory::find($id);
+        $categoryList = $this->blogCategoryRepository->getForComboBox();
+
+        return view('blog.admin.categories.edit', compact(['item', 'categoryList']));
     }
 
     /**
