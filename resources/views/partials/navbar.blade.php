@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <a class="nav-link" href="">Статьи</a>
+                <a class="nav-link" href="{{ route('blog.admin.posts.index') }}">Статьи</a>
                 {{-- Временная ссылка, в будущем будет только при доступе АДМИН --}}
                 <a class="nav-link" href="{{ route('blog.admin.categories.index') }}">Категории</a>
             </ul>
