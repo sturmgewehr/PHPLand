@@ -134,6 +134,16 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        dd(__METHOD__);
+        $result = BlogCategory::destroy($id);
+
+        if($result)
+        {
+            return redirect()->route('blog.admin.categories.index')
+                ->with(['success' => 'Успешно удалено']);
+        } else
+        {
+            return back()->withErrors(['msg' => 'Ошибка удаления'])
+                ->withInput();
+        }
     }
 }
