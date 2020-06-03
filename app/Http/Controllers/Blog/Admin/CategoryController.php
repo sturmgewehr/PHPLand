@@ -56,7 +56,7 @@ class CategoryController extends Controller
         $data = $request->input();
 
         $item = BlogCategory::create($data);
-        
+
 
         if($item)
         {
@@ -88,7 +88,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $item = BlogCategory::find($id);
+        $item = $this->blogCategoryRepository->getEdit($id);
+        if(empty($item))
+            abort(404);
         $categoryList = $this->blogCategoryRepository->getForComboBox();
 
         return view('blog.admin.categories.edit', compact(['item', 'categoryList']));
@@ -103,7 +105,25 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd(__METHOD__);
+        $item = BlogCategory::find($id);
+        if(empty($item))
+        {
+            return back()->withErrors(['msg' => "Запись id=[{$id}] не найдена"])
+                ->withInput();
+        }
+
+        $data = $request->input();
+
+        $result = $item->update($data);
+        if($result)
+        {
+            return redirect()->route('blog.admin.categories.edit', $item->id)
+                ->with(['success' => 'Успешно сохранено']);
+        } else
+        {
+            return back()->withErrors(['msg' => 'Ошибка сохранения'])
+                ->withInput();
+        }
     }
 
     /**
