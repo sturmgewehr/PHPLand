@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-md-4">
                     @include('blog.admin.includes.item_save_data')
-                    @include('blog.admin.includes.item_edit_secondary_data')
+                    @include('blog.admin.posts.includes.item_edit_secondary_data')
                 </div>
             </div>
         </form>

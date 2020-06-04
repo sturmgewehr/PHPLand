@@ -16,14 +16,14 @@
 			<div class="card-body">
 				<div class="form-group">
 					<label for="title">Создано</label>
-					<input class="form-control" type="text" value="{{ $item->created_at }}" disabled>					
+					<input class="form-control" type="text" value="{{ $item->created_at }}" disabled>
 				</div>
 				<div class="form-group">
-					<label for="title"></label>
+					<label for="title">Обновлено</label>
 					<input class="form-control" type="text" value="{{ $item->updated_at }}" disabled>
 				</div>
 				<div class="form-group">
-					<label for="title"></label>
+					<label for="title">Удалено</label>
 					<input class="form-control" type="text" value="{{ $item->deleted_at }}" disabled>
 				</div>
 			</div>

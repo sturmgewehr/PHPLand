@@ -106,7 +106,7 @@ class PostController extends Controller
         $result = $item->update($data);
         if($result)
         {
-            return redirect()->route('blog.admin.posts.edit')
+            return redirect()->route('blog.admin.posts.edit', $item->id)
                 ->with(['success' => 'Успешно сохранено']);
         } else
         {
