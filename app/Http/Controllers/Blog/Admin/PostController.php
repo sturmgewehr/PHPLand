@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Blog\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use App\Repositories\BlogPostRepository;
 use App\Repositories\BlogCategoryRepository;
@@ -123,6 +124,15 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $result = BlogPost::destroy($id);
+        if($result)
+        {
+            return redirect()->route('blog.admin.posts.index')
+                ->with(['success' => 'Успешно удалено']);
+        } else
+        {
+            return back()->withErrors(['msg' => 'Ошибка удаления'])
+                ->withInput();
+        }
     }
 }
