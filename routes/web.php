@@ -25,6 +25,9 @@ Route::group(['prefix' => 'admin/blog', 'namespace' => 'Blog\Admin'], function (
         ->except(['show'])
         ->names('blog.admin.posts');
 });
+Route::group(['prefix' => 'blog', 'namespace' => 'Blog'], function () {
+    Route::resource('posts', 'PostController')->names('blog.posts');
+});
 
 Auth::routes();
 

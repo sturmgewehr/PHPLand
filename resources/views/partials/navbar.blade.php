@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark custom-bg-dark custom-shadow">
+<nav class="navbar navbar-expand-lg navbar-dark custom-bg-dark custom-shadow">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
@@ -13,6 +13,8 @@
                 <a class="nav-link" href="{{ route('blog.admin.posts.index') }}">Статьи</a>
                 {{-- Временная ссылка, в будущем будет только при доступе АДМИН --}}
                 <a class="nav-link" href="{{ route('blog.admin.categories.index') }}">Категории</a>
+                {{--Ссылка на статьи ПостКонтроллера(не админ)--}}
+                <a class="nav-link" href="{{ route('blog.posts.index') }}">Статьи не админа</a>
             </ul>
 
             <!-- Right Side Of Navbar -->

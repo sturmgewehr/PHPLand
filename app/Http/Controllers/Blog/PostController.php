@@ -4,9 +4,27 @@ namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Repositories\BlogPostRepository;
+use App\Repositories\BlogCategoryRepository;
 
 class PostController extends Controller
 {
+    /**
+     * @var BlogPostRepository
+     */
+    private $blogPostRepository;
+
+    /**
+     * @var BlogCategoryRepository
+     */
+    private $blogCategoryRepository;
+
+    public function __construct()
+    {
+        $this->blogCategoryRepository = app(BlogCategoryRepository::class);
+        $this->blogPostRepository = app(BlogPostRepository::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +32,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $paginator = $this->blogPostRepository->getAllWithPaginate(20);
+        return view('blog.posts.index', compact('paginator'));
     }
 
     /**
@@ -24,7 +43,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        dd(__METHOD__);
+
     }
 
     /**
@@ -35,7 +55,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd(__METHOD__);
+
     }
 
     /**
@@ -46,7 +67,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        dd(__METHOD__);
+
     }
 
     /**
@@ -57,7 +79,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        dd(__METHOD__);
+
     }
 
     /**
@@ -69,7 +92,8 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd(__METHOD__);
+
     }
 
     /**
@@ -80,6 +104,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd(__METHOD__);
+
     }
 }
