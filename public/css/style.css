@@ -32,6 +32,15 @@ span.custom-bg-dark {
 .article-content {
     font-size: 1.2em;
 }
+/*custom link for category*/
+.simple-link {
+    padding: 10px 0px;
+    color: #6d6b6d;
+}
+.simple-link:hover {
+    color: #2f8cb8;
+
+}
 /* TEMP CLASS */
 .dummy {
 	background-color: #7F7F7F;

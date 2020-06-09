@@ -3,9 +3,9 @@
         <div class="card">
             <div class="card-body">
                 <div>
-                    <span>{{ $item->user->name }}</span>
-                    <h2>{{ $item->title }}</h2>
-                    <span>{{ $item->category->title }}</span>
+                    <a class="nav-link simple-link" href="">{{ $item->user->name }}</a>
+                    <h2 class="simple-header">{{ $item->title }}</h2>
+                    <a class="nav-link simple-link" href="">{{ $item->category->title }}</a>
                 </div>
                 <div class="text-justify article-content">
                         {{ $item->content_html }}
