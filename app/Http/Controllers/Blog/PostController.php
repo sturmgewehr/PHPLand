@@ -33,7 +33,10 @@ class PostController extends Controller
     public function index()
     {
         $paginator = $this->blogPostRepository->getAllWithPaginate(20);
-        return view('blog.posts.index', compact('paginator'));
+
+        $categoryList = $this->blogCategoryRepository->getForComboBox();
+
+        return view('blog.posts.index', compact(['paginator', 'categoryList']));
     }
 
     /**

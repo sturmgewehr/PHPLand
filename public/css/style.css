@@ -1,8 +1,32 @@
 .custom-bg-dark {
 	background-color: #0C1013;
 }
+span.custom-bg-dark {
+    color: #eff7e8;
+}
 .custom-shadow {
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+}
+.blog {
+    margin: 4em 0;
+    position: relative;
+}
+.blog .card {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+}
+.article-border {
+    border-bottom: 2px solid #0C1013;
+    padding: 5px;
+}
+.article-border:first-child {
+    border-top: 2px solid #0C1013;
+}
+.article-bottom-span {
+    font-size: .8em;
+}
+.article-body {
+    margin: 10px;
 }
 /* TEMP CLASS */
 .dummy {

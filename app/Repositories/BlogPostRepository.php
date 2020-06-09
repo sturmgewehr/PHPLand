@@ -27,6 +27,7 @@ class BlogPostRepository extends CoreRepository
             'category_id',
             'published_at',
             'is_published',
+            'excerpt',
         ];
 
         $result = $this->startConditions()
