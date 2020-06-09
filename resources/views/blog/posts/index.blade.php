@@ -3,6 +3,7 @@
 @section('content')
     <div class="blog">
         <div class="container">
+            @include('blog.admin.includes.display_action_status')
             <div class="row row-flex">
                 <div class="col-md-8 col-lg-8">
                     @foreach($paginator as $item)

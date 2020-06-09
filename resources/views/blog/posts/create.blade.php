@@ -3,8 +3,7 @@
 @section('content')
     <div class="container">
         @include('blog.admin.includes.display_action_status')
-        <form method="POST" action="{{ route('blog.admin.posts.store', $item->id) }}">
-            @method('PATCH')
+        <form method="POST" action="{{ route('blog.posts.store', $item->id) }}">
             @csrf
             <div class="row justify-content-center">
                 <div class="col-md-7">

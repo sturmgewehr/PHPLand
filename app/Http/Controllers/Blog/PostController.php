@@ -62,7 +62,19 @@ class PostController extends Controller
      */
     public function store(BlogPostCreateRequest $request)
     {
-        $item
+        $data = $request->input();
+
+        $item = BlogPost::create($data);
+
+        if($item)
+        {
+            return redirect()->route('blog.posts.index')
+                ->with(['success' => 'Успешно сохранено']);
+        } else
+        {
+            return back()->withErrors(['msg' => 'Ошибка сохранения'])
+                ->withInput();
+        }
     }
 
     /**
