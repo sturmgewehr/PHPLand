@@ -52,11 +52,9 @@ class CategoryController extends Controller
      */
     public function store(BlogCategoryCreateRequest $request)
     {
-//        dd($request, __METHOD__);
         $data = $request->input();
 
         $item = BlogCategory::create($data);
-
 
         if($item)
         {

@@ -9,6 +9,20 @@ use Illuminate\Support\Str;
 class BlogPostObserver
 {
     /**
+     * @param BlogPost $blogPost
+     */
+    public function creating(BlogPost $blogPost)
+    {
+        $this->setSlug($blogPost);
+
+        $this->setPublishedAt($blogPost);
+
+        $this->setContentHtml($blogPost);
+
+        $this->setUser($blogPost);
+    }
+
+    /**
      * Handle the blog post "created" event.
      *
      * @param  \App\Models\BlogPost  $blogPost
@@ -88,5 +102,17 @@ class BlogPostObserver
         {
             $blogPost->published_at = Carbon::now();
         }
+    }
+    protected function setContentHtml(BlogPost $blogPost)
+    {
+        if($blogPost->isDirty('content_raw'))
+        {
+            $blogPost->content_html = $blogPost->content_raw;
+        }
+    }
+
+    protected function setUser(BlogPost $blogPost)
+    {
+        $blogPost->user_id = auth()->id() ?? BlogPost::UNKNOWN_USER;
     }
 }
