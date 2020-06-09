@@ -1,4 +1,4 @@
-<div class="col-sm-12 col-md-12 col-lg-12 sidebar shadow-lg">
+<div class="col-sm-12 col-md-12 col-lg-12 sidebar">
     <div class="list-group">
         <span class="list-group-item custom-bg-dark">
             Категории

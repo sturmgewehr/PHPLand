@@ -8,7 +8,6 @@
                         <a class="nav-link active" data-toggle="tab" href="#maindata" role="tab">Основные данные</a>
                     </li>
                 </ul>
-                <br>
                 <div class="tab-content">
                     <div class="tab-pane active" id="maindata" role="tabpanel">
                         <div class="form-group">

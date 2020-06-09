@@ -10,7 +10,7 @@
                             <h4 class="card-title">
                                 <a class="card-link" href="{{ route('blog.posts.show', $item->id) }}">{{ $item->title }}</a>
                             </h4>
-                            <div class="article-body">
+                            <div class="article-preview-body">
                                 <p class="card-text">{{ $item->excerpt }}</p>
                             </div>
                             <div class="row">

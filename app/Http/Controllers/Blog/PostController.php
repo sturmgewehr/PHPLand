@@ -70,8 +70,12 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        dd(__METHOD__);
-
+//        dd(__METHOD__);
+        $item = $this->blogPostRepository->getEdit($id);
+        if(empty($item))
+            abort(404);
+        $categoryList = $this->blogCategoryRepository->getForComboBox();
+        return view('blog.posts.show', compact(['item', 'categoryList']));
     }
 
     /**
