@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BlogPostCreateRequest;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use App\Repositories\BlogPostRepository;
@@ -59,10 +60,9 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BlogPostCreateRequest $request)
     {
-        dd(__METHOD__);
-
+        $item
     }
 
     /**
