@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
+use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use App\Repositories\BlogPostRepository;
 use App\Repositories\BlogCategoryRepository;
@@ -46,8 +47,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        dd(__METHOD__);
+        $item = new BlogPost();
+        $categoryList = $this->blogCategoryRepository->getForComboBox();
 
+        return view('blog.posts.create', compact(['item', 'categoryList']));
     }
 
     /**
@@ -70,11 +73,12 @@ class PostController extends Controller
      */
     public function show($id)
     {
-//        dd(__METHOD__);
         $item = $this->blogPostRepository->getEdit($id);
         if(empty($item))
             abort(404);
+
         $categoryList = $this->blogCategoryRepository->getForComboBox();
+
         return view('blog.posts.show', compact(['item', 'categoryList']));
     }
 

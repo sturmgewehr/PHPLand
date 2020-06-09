@@ -15,6 +15,9 @@
                 <a class="nav-link" href="{{ route('blog.admin.categories.index') }}">Категории</a>
                 {{--Ссылка на статьи ПостКонтроллера(не админ)--}}
                 <a class="nav-link" href="{{ route('blog.posts.index') }}">Статьи не админа</a>
+                {{-- Ссылка на создание статьи, временно --}}
+                <a class="nav-link" href="{{ route('blog.posts.create') }}">Написать статью</a>
+
             </ul>
 
             <!-- Right Side Of Navbar -->
