@@ -57,16 +57,6 @@
                             <textarea class="form-control" name="excerpt" id="excerpt" rows="3">{{ old('excerpt', $item->excerpt) }}</textarea>
                         </div>
 
-                        <div class="form-check">
-                            <input type="hidden" name="is_published" value="0">
-
-                            <input class="form-check-input" type="checkbox" name="is_published" value="1"
-                                   @if ($item->is_published)
-                                   checked
-                                @endif>
-                            <label class="form-check-label" for="is_published">Опубликовано</label>
-                        </div>
-
                     </div>
                 </div>
             </div>

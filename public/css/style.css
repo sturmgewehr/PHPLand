@@ -2,7 +2,7 @@
 	background-color: #0C1013;
 }
 span.custom-bg-dark {
-    color: #eff7e8;
+    color: #fff;
 }
 .custom-shadow {
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
@@ -17,10 +17,11 @@ span.custom-bg-dark {
 /*    !*margin-bottom: 10px;*!*/
 /*}*/
 .article-border {
-    border-bottom: 2px solid #0C1013;
     padding: 5px;
 }
-.article-border:first-child {
+.article-border,
+.article-border:first-child
+{
     border-top: 2px solid #0C1013;
 }
 .article-bottom-span {
@@ -39,7 +40,9 @@ span.custom-bg-dark {
 }
 .simple-link:hover {
     color: #2f8cb8;
-
+}
+.char-lg-size {
+    font-size: 1.5em;
 }
 /* TEMP CLASS */
 .dummy {
