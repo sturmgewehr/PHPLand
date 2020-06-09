@@ -1,13 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header">
-                @if ($item->is_published)
-                    Опубликовано
-                @else
-                    Черновик
-                @endif
-            </div>
+            @include('blog.includes.item_filling_header')
             <div class="card-body">
 
                 <ul class="nav nav-tabs" role="tablist">
@@ -57,16 +51,7 @@
                             <textarea class="form-control" name="excerpt" id="excerpt" rows="3">{{ old('excerpt', $item->excerpt) }}</textarea>
                         </div>
 
-                        <div class="form-check">
-                            <input type="hidden" name="is_published" value="0">
-
-                            <input class="form-check-input" type="checkbox" name="is_published" value="1"
-                                   @if ($item->is_published)
-                                   checked
-                                @endif>
-                            <label class="form-check-label" for="is_published">Опубликовано</label>
-                        </div>
-
+                        @include('blog.includes.item_filling_published_checkbox')
                     </div>
                 </div>
             </div>

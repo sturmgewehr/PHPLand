@@ -1,13 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header">
-                @if ($item->is_published)
-                    Опубликовано
-                @else
-                    Черновик
-                @endif
-            </div>
+            @include('blog.includes.item_filling_header')
             <div class="card-body">
 
                 <ul class="nav nav-tabs" role="tablist">
