@@ -45,4 +45,28 @@ class BlogPostRepository extends CoreRepository
     {
         return $this->startConditions()->find($id);
     }
+
+    public function getAllPublishedWithPaginate($perPage = null)
+    {
+        $columns = [
+            'id',
+            'title',
+            'user_id',
+            'category_id',
+            'published_at',
+            'is_published',
+            'excerpt',
+        ];
+
+        $result = $this->startConditions()
+            ->select($columns)
+            ->where('is_published', 1)
+            ->orderBy('id', 'DESC')
+            ->with([
+                'category:id,title',
+                'user:id,name',
+            ])->paginate($perPage);
+
+        return $result;
+    }
 }

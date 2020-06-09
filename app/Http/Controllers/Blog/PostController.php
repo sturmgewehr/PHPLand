@@ -34,7 +34,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $paginator = $this->blogPostRepository->getAllWithPaginate(20);
+        $paginator = $this->blogPostRepository->getAllPublishedWithPaginate(20);
 
         $categoryList = $this->blogCategoryRepository->getForComboBox();
 
