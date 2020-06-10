@@ -1,7 +1,12 @@
 .custom-bg-dark {
 	background-color: #0C1013;
 }
-span.custom-bg-dark {
+.custom-bg-black {
+    background-color: #000;
+}
+span.custom-bg-dark,
+footer.custom-bg-dark
+{
     color: #fff;
 }
 .custom-shadow {
@@ -43,6 +48,14 @@ span.custom-bg-dark {
 }
 .char-lg-size {
     font-size: 1.5em;
+}
+
+footer {
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, .5);
+}
+
+.footer-top-border {
+    border-top: 5px solid #000;
 }
 /* TEMP CLASS */
 .dummy {
