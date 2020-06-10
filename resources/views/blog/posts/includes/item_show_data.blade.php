@@ -8,7 +8,7 @@
                             <a class="nav-link simple-link" href="">{{ $item->user->name }}</a>
                         </div>
                         <div class="col-md-6 col-lg-6">
-                            <a class="nav-link simple-link char-lg-size float-right" href="{{ route('blog.posts.edit', $item->id) }}">⚙</a>
+                            <a class="nav-link simple-link article-bottom-span float-right" href="{{ route('blog.posts.edit', $item->id) }}">Редактировать</a>
                         </div>
                     </div>
                     <h2 class="simple-header">{{ $item->title }}</h2>

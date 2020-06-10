@@ -12,7 +12,6 @@
             <ul class="navbar-nav mr-auto">
                 <a class="nav-link" href="{{ route('blog.posts.index') }}">Статьи</a>
                 <a class="nav-link" href="{{ route('blog.posts.create') }}">Написать статью</a>
-
             </ul>
 
             <!-- Right Side Of Navbar -->

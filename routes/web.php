@@ -26,7 +26,22 @@ Route::group(['prefix' => 'admin/blog', 'namespace' => 'Blog\Admin', 'middleware
         ->names('blog.admin.posts');
 });
 Route::group(['prefix' => 'blog', 'namespace' => 'Blog'], function () {
-    Route::resource('posts', 'PostController')->names('blog.posts');
+//    Route::resource('posts', 'PostController')
+//        ->names('blog.posts');
+
+    Route::resource('posts', 'PostController')
+        ->only(['create', 'store'])
+        ->middleware('auth')
+        ->names('blog.posts');
+
+    Route::resource('posts', 'PostController')
+        ->only(['edit', 'update', 'destroy'])
+        ->middleware('has.article')
+        ->names('blog.posts');
+
+    Route::resource('posts', 'PostController')
+        ->only(['show', 'index'])
+        ->names('blog.posts');
 });
 
 Auth::routes();

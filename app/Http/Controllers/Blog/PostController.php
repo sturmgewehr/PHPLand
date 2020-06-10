@@ -8,6 +8,9 @@ use App\Http\Requests\BlogPostUpdateRequest;
 use App\Models\BlogPost;
 use App\Repositories\BlogPostRepository;
 use App\Repositories\BlogCategoryRepository;
+use Illuminate\Contracts\Cookie\Factory;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Cookie;
 
 class PostController extends Controller
 {
@@ -90,6 +93,8 @@ class PostController extends Controller
             abort(404);
 
         $categoryList = $this->blogCategoryRepository->getForComboBox();
+
+        Cookie::queue('users_article', $item->user->id, 15);
 
         return view('blog.posts.show', compact(['item', 'categoryList']));
     }
