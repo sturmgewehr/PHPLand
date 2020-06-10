@@ -16,7 +16,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin/blog', 'namespace' => 'Blog\Admin'], function () {
+Route::group(['prefix' => 'admin/blog', 'namespace' => 'Blog\Admin', 'middleware' => 'admin'], function () {
     Route::resource('categories', 'CategoryController')
         ->except(['show'])
         ->names('blog.admin.categories');
