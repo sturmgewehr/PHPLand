@@ -16,6 +16,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Admin routes
 Route::group(['prefix' => 'admin/blog', 'namespace' => 'Blog\Admin', 'middleware' => 'admin'], function () {
     Route::resource('categories', 'CategoryController')
         ->except(['show'])
@@ -24,11 +25,17 @@ Route::group(['prefix' => 'admin/blog', 'namespace' => 'Blog\Admin', 'middleware
     Route::resource('posts', 'PostController')
         ->except(['show'])
         ->names('blog.admin.posts');
+
+    Route::resource('users', 'UserController')
+        ->names('blog.admin.users');
 });
+
+//Default routes
 Route::group(['prefix' => 'blog', 'namespace' => 'Blog'], function () {
 //    Route::resource('posts', 'PostController')
 //        ->names('blog.posts');
 
+//    Post Routes
     Route::resource('posts', 'PostController')
         ->only(['create', 'store'])
         ->middleware('auth')
@@ -42,6 +49,8 @@ Route::group(['prefix' => 'blog', 'namespace' => 'Blog'], function () {
     Route::resource('posts', 'PostController')
         ->only(['show', 'index'])
         ->names('blog.posts');
+
+//
 });
 
 Auth::routes();
