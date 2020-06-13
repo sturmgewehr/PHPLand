@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\BlogCategoryCreateRequest;
 use App\Models\BlogCategory;
 use App\Repositories\BlogCategoryRepository;
-use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
     /**
      * @var BlogCategoryRepository $blogCategoryRepository

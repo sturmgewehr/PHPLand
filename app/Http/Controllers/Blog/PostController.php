@@ -12,7 +12,7 @@ use Illuminate\Contracts\Cookie\Factory;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 
-class PostController extends Controller
+class PostController extends BaseController
 {
     /**
      * @var BlogPostRepository
