@@ -29,6 +29,9 @@ footer.custom-bg-dark
 {
     border-top: 2px solid #0C1013;
 }
+.article-border:last-child {
+    border-bottom: 2px solid #0C1013;
+}
 .article-bottom-span {
     font-size: .8em;
 }
