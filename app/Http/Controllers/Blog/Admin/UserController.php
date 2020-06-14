@@ -2,10 +2,21 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends BaseController
 {
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+
+    public function __construct()
+    {
+        $this->userRepository = app(UserRepository::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +24,8 @@ class UserController extends BaseController
      */
     public function index()
     {
-        dd(__METHOD__);
+        $paginator = $this->userRepository->getAllWithPaginate(15);
+        return view('blog.admin.users.index', compact('paginator'));
     }
 
     /**
