@@ -19,7 +19,10 @@
                             </thead>
                             <tbody>
                                 @foreach($paginator as $user)
-                                    <tr @if($user->is_admin) style="background-color: rgba(43,153,95,0.42)" @endif>
+                                    <tr
+                                        @if($user->is_admin) style="background-color: rgba(43,153,95,0.42)" @endif
+                                        @if($user->is_banned) style="background-color: #ccc" @endif
+                                    >
                                         <td>{{ $user->id }}</td>
                                         <td>
                                             <a href="{{ route('blog.admin.users.edit', $user->id) }}">{{ $user->name }}</a>

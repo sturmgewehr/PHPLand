@@ -16,7 +16,7 @@
                 </div>
             </div>
         </form>
-        @if($item->userRole !== 1)
+        @if($item->is_admin !== 1)
             <form action="{{ route('blog.admin.users.destroy', $item->id) }}" method="POST">
                 @method('DELETE')
                 @csrf

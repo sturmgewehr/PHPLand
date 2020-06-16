@@ -14,10 +14,11 @@
                     <input class="form-control" type="text" name="email" value="{{ $item->email }}" disabled>
                 </div>
                 <div class="form-check">
-                    <input type="hidden" {{--name="is_banned"--}} value="0">
+                    <input type="hidden" name="is_banned" value="0">
 
-                    <input class="form-check-input" type="checkbox" {{--name="is_banned"--}}
-                        @if($item->userRole === 1  ) disabled @endif>
+                    <input class="form-check-input" type="checkbox" name="is_banned" value="1"
+                           @if($item->is_banned) checked @endif
+                           @if($item->is_admin === 1  ) disabled @endif>
                     <label class="form-check-label" for="is_banned">Забанить</label>
                 </div>
             </div>

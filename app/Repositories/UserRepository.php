@@ -30,6 +30,7 @@ class UserRepository extends CoreRepository
             'name',
             'email',
             'is_admin',
+            'is_banned',
         ];
 
         $result = $this->startConditions()
