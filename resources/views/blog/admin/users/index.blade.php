@@ -4,6 +4,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10 col-lg-10 col-sm-12">
+
+                @include('blog.admin.includes.display_action_status')
+
                 <div class="card">
                     <div class="card-body">
                         <table class="table table-hover">
