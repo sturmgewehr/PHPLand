@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Blog\Admin;
 
 use App\Repositories\UserRepository;
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends BaseController
@@ -71,8 +72,8 @@ class UserController extends BaseController
      */
     public function edit($id)
     {
-        dd(__METHOD__);
-
+        $item = $this->userRepository->getEdit($id);
+        return  view('blog.admin.users.edit', compact('item'));
     }
 
     /**
@@ -84,8 +85,25 @@ class UserController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        dd(__METHOD__);
+        $item = $this->userRepository->getEdit($id);
+        if(empty($item))
+        {
+            return back()->withErrors(['msg' => "Пользователь id=[{$id}] не найден"])
+                ->withInput();
+        }
 
+        $data = $request->input();
+
+        $result = $item->update($data);
+        if($result)
+        {
+            return redirect()->route('blog.admin.users.edit', $id)
+                ->with(['success' => 'Успешно сохранено']);
+        } else
+        {
+            return back()->withErrors(['msg' => 'Ошибка сохранения'])
+                ->withInput();
+        }
     }
 
     /**
@@ -96,7 +114,15 @@ class UserController extends BaseController
      */
     public function destroy($id)
     {
-        dd(__METHOD__);
-
+        $result = User::destroy($id);
+        if($result)
+        {
+            return redirect()->route('blog.admin.users.index')
+                ->with(['success' => 'Успешно удалено']);
+        } else
+        {
+            return back()->withErrors(['msg' => 'Ошибка удаления'])
+                ->withInput();
+        }
     }
 }
