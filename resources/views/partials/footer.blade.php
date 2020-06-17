@@ -29,11 +29,11 @@
                     <li>
 {{--                        Надо настроить стиль--}}
                         <h5>Эл.почта</h5>
-                        <span>impala67dean666@gmail.com</span>
+                        <span>testovka@test.com</span>
                     </li>
                     <li>
                         <h5>Телефон</h5>
-                        <span>+38 098 802 5990</span>
+                        <span>+130 15 715 1488</span>
                     </li>
                 </ul>
 
@@ -77,4 +77,5 @@
     <!-- Copyright -->
 
 </footer>
+
 <!-- Footer -->
