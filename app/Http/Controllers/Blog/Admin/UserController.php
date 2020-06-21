@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
-use App\Repositories\UserRepository;
+use App\Services\UserService;
 use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends BaseController
 {
     /**
-     * @var UserRepository
+     * @var UserService
      */
-    private $userRepository;
+    private $userService;
 
     public function __construct()
     {
-        $this->userRepository = app(UserRepository::class);
+        $this->userService = app(UserService::class);
     }
 
     /**
@@ -25,7 +25,7 @@ class UserController extends BaseController
      */
     public function index()
     {
-        $paginator = $this->userRepository->getAllWithPaginate(15);
+        $paginator = $this->userService->getAllWithPaginate(15);
         return view('blog.admin.users.index', compact('paginator'));
     }
 
@@ -72,7 +72,7 @@ class UserController extends BaseController
      */
     public function edit($id)
     {
-        $item = $this->userRepository->getEdit($id);
+        $item = $this->userService->getEdit($id);
         return  view('blog.admin.users.edit', compact('item'));
     }
 
@@ -85,19 +85,13 @@ class UserController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        $item = $this->userRepository->getEdit($id);
-        if(empty($item))
-        {
-            return back()->withErrors(['msg' => "Пользователь id=[{$id}] не найден"])
-                ->withInput();
-        }
-
         $data = $request->input();
 
-        $result = $item->update($data);
-        if($result)
+        $item = $this->userService->update($id, $data);
+
+        if($item)
         {
-            return redirect()->route('blog.admin.users.edit', $id)
+            return redirect()->route('blog.admin.users.edit', $item->id)
                 ->with(['success' => 'Успешно сохранено']);
         } else
         {
@@ -114,7 +108,7 @@ class UserController extends BaseController
      */
     public function destroy($id)
     {
-        $result = User::destroy($id);
+        $result = $this->userService->destroy($id);
         if($result)
         {
             return redirect()->route('blog.admin.users.index')
