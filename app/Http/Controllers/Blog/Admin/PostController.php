@@ -3,26 +3,26 @@
 namespace App\Http\Controllers\Blog\Admin;
 
 use App\Models\BlogPost;
-use App\Repositories\BlogPostRepository;
-use App\Repositories\BlogCategoryRepository;
 use App\Http\Requests\BlogPostUpdateRequest;
+use App\Services\BlogCategoryService;
+use App\Services\BlogPostService;
 
 class PostController extends BaseController
 {
     /**
-     * @var BlogPostRepository
+     * @var BlogPostService
      */
-    private $blogPostRepository;
+    private $blogPostService;
 
     /**
-     * @var BlogCategoryRepository
+     * @var BlogCategoryService
      */
-    private $blogCategoryRepository;
+    private $blogCategoryService;
 
     public function __construct()
     {
-        $this->blogPostRepository = app(BlogPostRepository::class);
-        $this->blogCategoryRepository = app(BlogCategoryRepository::class);
+        $this->blogPostService = app(BlogPostService::class);
+        $this->blogCategoryService = app(BlogCategoryService::class);
     }
 
     /**
@@ -32,7 +32,7 @@ class PostController extends BaseController
      */
     public function index()
     {
-        $paginator = $this->blogPostRepository->getAllWithPaginate(25);
+        $paginator = $this->blogPostService->getAllWithPaginate(25);
         return view('blog.admin.posts.index', compact('paginator'));
     }
 
@@ -76,10 +76,9 @@ class PostController extends BaseController
      */
     public function edit($id)
     {
-        $item = $this->blogPostRepository->getEdit($id);
-        if(empty($item))
-            abort(404);
-        $categoryList = $this->blogCategoryRepository->getForComboBox();
+        $item = $this->blogPostService->getEdit($id);
+
+        $categoryList = $this->blogCategoryService->getForComboBox();
 
         return view('blog.admin.posts.edit', compact(['item', 'categoryList']));
     }
@@ -93,17 +92,11 @@ class PostController extends BaseController
      */
     public function update(BlogPostUpdateRequest $request, $id)
     {
-        $item = $this->blogPostRepository->getEdit($id);
-        if(empty($item))
-        {
-            return back()->withErrors(['msg' => "Запись id=[{$id}] не найдена"])
-                ->withInput();
-        }
-
         $data = $request->input();
 
-        $result = $item->update($data);
-        if($result)
+        $item = $this->blogPostService->update($id, $data);
+
+        if($item)
         {
             return redirect()->route('blog.admin.posts.edit', $item->id)
                 ->with(['success' => 'Успешно сохранено']);
@@ -122,7 +115,7 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        $result = BlogPost::destroy($id);
+        $result = $this->blogPostService->destroy($id);
         if($result)
         {
             return redirect()->route('blog.admin.posts.index')
