@@ -30,4 +30,6 @@ abstract class CoreRepository
     abstract public function update($id, array $input);
 
     abstract public function destroy($id);
+
+    abstract protected function convertToArray(array $items);
 }
