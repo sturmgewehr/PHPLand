@@ -6,28 +6,27 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BlogPostCreateRequest;
 use App\Http\Requests\BlogPostUpdateRequest;
 use App\Models\BlogPost;
-use App\Repositories\BlogPostRepository;
-use App\Repositories\BlogCategoryRepository;
-use Illuminate\Contracts\Cookie\Factory;
-use Illuminate\Support\Facades\Cache;
+use App\Services\BlogCategoryService;
+use App\Services\BlogPostService;
 use Illuminate\Support\Facades\Cookie;
 
 class PostController extends BaseController
 {
     /**
-     * @var BlogPostRepository
+     * @var BlogCategoryService
      */
-    private $blogPostRepository;
+    private $blogCategoryService;
 
     /**
-     * @var BlogCategoryRepository
+     * @var BlogPostService
      */
-    private $blogCategoryRepository;
+    private $blogPostService;
 
     public function __construct()
     {
-        $this->blogCategoryRepository = app(BlogCategoryRepository::class);
-        $this->blogPostRepository = app(BlogPostRepository::class);
+        $this->blogCategoryService = app(BlogCategoryService::class);
+
+        $this->blogPostService = app(BlogPostService::class);
     }
 
     /**
@@ -37,9 +36,9 @@ class PostController extends BaseController
      */
     public function index()
     {
-        $paginator = $this->blogPostRepository->getAllPublishedWithPaginate(20);
+        $paginator = $this->blogPostService->getAllPublishedWithPaginate(20);
 
-        $categoryList = $this->blogCategoryRepository->getForComboBox();
+        $categoryList = $this->blogCategoryService->getForComboBox();
 
         return view('blog.posts.index', compact(['paginator', 'categoryList']));
     }
@@ -52,7 +51,7 @@ class PostController extends BaseController
     public function create()
     {
         $item = new BlogPost();
-        $categoryList = $this->blogCategoryRepository->getForComboBox();
+        $categoryList = $this->blogCategoryService->getForComboBox();
 
         return view('blog.posts.create', compact(['item', 'categoryList']));
     }
@@ -67,9 +66,9 @@ class PostController extends BaseController
     {
         $data = $request->input();
 
-        $item = BlogPost::create($data);
+        $result = $this->blogPostService->create($data);
 
-        if($item)
+        if($result)
         {
             return redirect()->route('blog.posts.index')
                 ->with(['success' => 'Успешно сохранено']);
@@ -88,11 +87,9 @@ class PostController extends BaseController
      */
     public function show($id)
     {
-        $item = $this->blogPostRepository->getEdit($id);
-        if(empty($item))
-            abort(404);
+        $item = $this->blogPostService->getEdit($id);
 
-        $categoryList = $this->blogCategoryRepository->getForComboBox();
+        $categoryList = $this->blogCategoryService->getForComboBox();
 
         Cookie::queue('users_article', $item->user->id, 15);
 
@@ -107,10 +104,9 @@ class PostController extends BaseController
      */
     public function edit($id)
     {
-        $item = $this->blogPostRepository->getEdit($id);
-        if(empty($item))
-            abort(404);
-        $categoryList = $this->blogCategoryRepository->getForComboBox();
+        $item = $this->blogPostService->getEdit($id);
+
+        $categoryList = $this->blogCategoryService->getForComboBox();
 
         return view('blog.posts.edit', compact(['item', 'categoryList']));
     }
@@ -124,14 +120,11 @@ class PostController extends BaseController
      */
     public function update(BlogPostUpdateRequest $request, $id)
     {
-        $item = BlogPost::find($id);
-        if(empty($item))
-            abort(404);
-
         $data = $request->input();
 
-        $result = $item->update($data);
-        if($result)
+        $item = $this->blogPostService->update($id, $data);
+
+        if($item)
         {
             return redirect()->route('blog.posts.edit', $item->id)
                 ->with(['success' => 'Успешно сохранено']);
@@ -150,7 +143,7 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        $result = BlogPost::destroy($id);
+        $result = $this->blogPostService->destroy($id);
         if($result)
         {
             return redirect()->route('blog.posts.index')

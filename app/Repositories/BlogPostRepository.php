@@ -69,4 +69,31 @@ class BlogPostRepository extends CoreRepository
 
         return $result;
     }
+
+    public function create(array $input)
+    {
+        $model = $this->startConditions();
+
+        $model->fill($input);
+
+        $result = $model->save();
+
+        return $result;
+    }
+
+    public function update($id, array $input)
+    {
+        $model = $this->getEdit($id);
+
+        $model->fill($input);
+
+        $model->save();
+
+        return $model;
+    }
+
+    public function destroy($id)
+    {
+        return $this->getEdit($id)->delete();
+    }
 }
