@@ -31,5 +31,5 @@ abstract class CoreRepository
 
     abstract public function destroy($id);
 
-    abstract protected function convertToArray(array $items);
+    abstract protected function convertToArray($model);
 }
