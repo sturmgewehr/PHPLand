@@ -91,7 +91,7 @@ class PostController extends BaseController
 
         $categoryList = $this->blogCategoryService->getForComboBox();
 
-        Cookie::queue('users_article', $item->user->id, 15);
+        Cookie::queue('users_article', $item['user']['id'], 15);
 
         return view('blog.posts.show', compact(['item', 'categoryList']));
     }
@@ -126,7 +126,7 @@ class PostController extends BaseController
 
         if($item)
         {
-            return redirect()->route('blog.posts.edit', $item->id)
+            return redirect()->route('blog.posts.edit', $item['post']['id'])
                 ->with(['success' => 'Успешно сохранено']);
         } else
         {

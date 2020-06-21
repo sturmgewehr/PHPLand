@@ -18,6 +18,15 @@ class BlogPostRepository extends CoreRepository
         return BlogPost::class;
     }
 
+    protected function convertToArray($model)
+    {
+        $user = $model->user->toArray();
+        $category = $model->category->toArray();
+        $post = $model->toArray();
+
+        return compact('post', 'user', 'category');
+    }
+
     public function getAllWithPaginate($perPage = null)
     {
         $columns = [
@@ -43,7 +52,11 @@ class BlogPostRepository extends CoreRepository
 
     public function getEdit($id)
     {
-        return $this->startConditions()->find($id);
+        $model = $this->startConditions()->find($id);
+
+        $converted = $this->convertToArray($model);
+
+        return $converted;
     }
 
     public function getAllPublishedWithPaginate($perPage = null)
@@ -83,13 +96,15 @@ class BlogPostRepository extends CoreRepository
 
     public function update($id, array $input)
     {
-        $model = $this->getEdit($id);
+        $model = $this->startConditions()->find($id);
 
         $model->fill($input);
 
         $model->save();
 
-        return $model;
+        $converted = $this->convertToArray($model);
+
+        return $converted;
     }
 
     public function destroy($id)
