@@ -22,4 +22,12 @@ abstract class CoreRepository
     }
 
     abstract public function getAllWithPaginate($perPage = null);
+
+    abstract public function getEdit($id);
+
+    abstract public function create(array $input);
+
+    abstract public function update($id, array $input);
+
+    abstract public function destroy($id);
 }
