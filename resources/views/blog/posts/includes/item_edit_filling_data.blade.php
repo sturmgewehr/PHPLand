@@ -18,12 +18,12 @@
                     <div class="tab-pane active" id="maindata" role="tabpanel">
                         <div class="form-group">
                             <label for="title">Заголовок</label>
-                            <input class="form-control" type="text" name="title" id="title" value="{{ old('title', $item->title) }}" minlength="5" required>
+                            <input class="form-control" type="text" name="title" id="title" value="{{ old('title', $item['post']['title']) }}" minlength="5" required>
                         </div>
 
                         <div class="form-group">
                             <label for="content_raw">Статья</label>
-                            <textarea class="form-control" name="content_raw" id="content_raw" rows="12">{{ old('content_raw', $item->content_raw) }}</textarea>
+                            <textarea class="form-control" name="content_raw" id="content_raw" rows="12">{{ old('content_raw', $item['post']['content_raw']) }}</textarea>
                         </div>
                     </div>
 
@@ -34,7 +34,7 @@
                             <select class="form-control" name="category_id" id="category_id" placeholder="Выберите категорию" required>
                                 @foreach ($categoryList as $categoryOption)
                                     <option value="{{ $categoryOption->id }}"
-                                            @if ($categoryOption->id == $item->category_id) selected @endif>
+                                            @if ($categoryOption->id == $item['post']['category_id']) selected @endif>
                                         {{ $categoryOption->id_title }}
                                     </option>
                                 @endforeach
@@ -43,12 +43,12 @@
 
                         <div class="form-group">
                             <label for="slug">Идентификатор</label>
-                            <input class="form-control" type="text" name="slug" id="slug" value="{{ old('slug', $item->slug) }}">
+                            <input class="form-control" type="text" name="slug" id="slug" value="{{ old('slug', $item['post']['slug']) }}">
                         </div>
 
                         <div class="form-group">
                             <label for="excerpt">Выдержка</label>
-                            <textarea class="form-control" name="excerpt" id="excerpt" rows="3">{{ old('excerpt', $item->excerpt) }}</textarea>
+                            <textarea class="form-control" name="excerpt" id="excerpt" rows="3">{{ old('excerpt', $item['post']['excerpt']) }}</textarea>
                         </div>
 
                     </div>

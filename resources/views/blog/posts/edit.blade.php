@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         @include('blog.admin.includes.display_action_status')
-        <form method="POST" action="{{ route('blog.posts.update', $item->id) }}">
+        <form method="POST" action="{{ route('blog.posts.update', $item['post']['id']) }}">
             @method('PATCH')
             @csrf
             <div class="row justify-content-center">
@@ -17,7 +17,7 @@
             </div>
         </form>
         <br>
-        <form method="POST" action="{{ route('blog.posts.destroy', $item->id) }}">
+        <form method="POST" action="{{ route('blog.posts.destroy', $item['post']['id']) }}">
             @method('DELETE')
             @csrf
             @include('blog.admin.posts.includes.item_delete')

@@ -5,17 +5,17 @@
                 <div>
                     <div class="row">
                         <div class="col-md-6 col-lg-6">
-                            <a class="nav-link simple-link" href="">{{ $item->user->name }}</a>
+                            <a class="nav-link simple-link" href="">{{ $item['user']['name'] }}</a>
                         </div>
                         <div class="col-md-6 col-lg-6">
-                            <a class="nav-link simple-link article-bottom-span float-right" href="{{ route('blog.posts.edit', $item->id) }}">Редактировать</a>
+                            <a class="nav-link simple-link article-bottom-span float-right" href="{{ route('blog.posts.edit', $item['post']['id']) }}">Редактировать</a>
                         </div>
                     </div>
-                    <h2 class="simple-header">{{ $item->title }}</h2>
-                    <a class="nav-link simple-link" href="">{{ $item->category->title }}</a>
+                    <h2 class="simple-header">{{ $item['post']['title'] }}</h2>
+                    <a class="nav-link simple-link" href="">{{ $item['category']['title'] }}</a>
                 </div>
                 <div class="text-justify article-content">
-                        {{ $item->content_html }}
+                        {{ $item['post']['content_html'] }}
                 </div>
             </div>
         </div>

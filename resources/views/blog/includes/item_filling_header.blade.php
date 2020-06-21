@@ -1,5 +1,5 @@
 <div class="card-header">
-    @if ($item->is_published)
+    @if ($item['post']['is_published'])
         Опубликовано
     @else
         Черновик
