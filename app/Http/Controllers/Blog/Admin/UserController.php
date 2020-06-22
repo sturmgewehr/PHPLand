@@ -91,7 +91,7 @@ class UserController extends BaseController
 
         if($item)
         {
-            return redirect()->route('blog.admin.users.edit', $item->id)
+            return redirect()->route('blog.admin.users.edit', $item['user']['id'])
                 ->with(['success' => 'Успешно сохранено']);
         } else
         {

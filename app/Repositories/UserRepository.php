@@ -18,9 +18,20 @@ class UserRepository extends CoreRepository
         return User::class;
     }
 
+    protected function convertToArray($model)
+    {
+        $userRole = $model->userRole;
+        $user = $model->toArray();
+        return compact('user', 'userRole');
+    }
+
     public function getEdit($id)
     {
-        return $this->startConditions()->find($id);
+        $model = $this->startConditions()->find($id);
+
+        $converted = $this->convertToArray($model);
+
+        return $converted;
     }
 
     public function getAllWithPaginate($perPage = null)
@@ -60,11 +71,13 @@ class UserRepository extends CoreRepository
 
         $model->save();
 
-        return $model;
+        $converted = $this->convertToArray($model);
+
+        return $converted;
     }
 
     public function destroy($id)
     {
-        return $this->startConditions()->delete($id);
+        return $this->startConditions()->find($id)->delete();
     }
 }
