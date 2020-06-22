@@ -109,6 +109,6 @@ class BlogPostRepository extends CoreRepository
 
     public function destroy($id)
     {
-        return $this->getEdit($id)->delete();
+        return $this->startConditions()->find($id)->delete();
     }
 }
