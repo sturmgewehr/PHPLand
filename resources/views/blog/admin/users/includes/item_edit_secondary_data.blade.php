@@ -12,11 +12,11 @@
         <div class="card-body">
             <div class="form-group">
                 <label for="">Создано</label>
-                <input class="form-control" type="text" value="{{ $item->created_at }}" disabled>
+                <input class="form-control" type="text" value="{{ $item['user']['created_at'] }}" disabled>
             </div>
             <div class="form-group">
                 <label for="">Обновлено</label>
-                <input class="form-control" type="text" value="{{ $item->updated_at }}" disabled>
+                <input class="form-control" type="text" value="{{ $item['user']['updated_at'] }}" disabled>
             </div>
         </div>
     </div>

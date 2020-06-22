@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         @include('blog.admin.includes.display_action_status')
-        <form action="{{ route('blog.admin.users.update', $item->id) }}" method="POST">
+        <form action="{{ route('blog.admin.users.update', $item['user']['id']) }}" method="POST">
             @method('PATCH')
             @csrf
             <div class="row justify-content-center">
@@ -16,8 +16,8 @@
                 </div>
             </div>
         </form>
-        @if($item->is_admin !== 1)
-            <form action="{{ route('blog.admin.users.destroy', $item->id) }}" method="POST">
+        @if($item['user']['is_admin'] !== 1)
+            <form action="{{ route('blog.admin.users.destroy', $item['user']['id']) }}" method="POST">
                 @method('DELETE')
                 @csrf
                 @include('blog.admin.posts.includes.item_delete')
