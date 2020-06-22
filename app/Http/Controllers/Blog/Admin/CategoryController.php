@@ -57,7 +57,7 @@ class CategoryController extends BaseController
 
         if($result)
         {
-            return redirect()->route('blog.admin.categories.create')
+            return redirect()->route('blog.admin.categories.index')
                 ->with(['success' => 'Успешно сохранено']);
         } else
         {
@@ -106,7 +106,7 @@ class CategoryController extends BaseController
         $item = $this->blogCategoryService->update($id, $data);
         if($item)
         {
-            return redirect()->route('blog.admin.categories.edit', $item->id)
+            return redirect()->route('blog.admin.categories.edit', $item['category']['id'])
                 ->with(['success' => 'Успешно сохранено']);
         } else
         {

@@ -14,9 +14,27 @@ class BlogCategoryRepository extends CoreRepository
         return BlogCategory::class;
     }
 
+    protected function convertToArray($model)
+    {
+        if(!is_null($model->parent))
+        {
+            $parent = $model->parent->toArray();
+        } else
+        {
+            $parent = null;
+        }
+        $category = $model->toArray();
+
+        return compact('category', 'parent');
+    }
+
     public function getEdit($id)
     {
-        return $this->startConditions()->find($id);
+        $model = $this->startConditions()->find($id);
+
+        $converted = $this->convertToArray($model);
+
+        return $converted;
     }
 
     public function getForComboBox()
@@ -62,11 +80,13 @@ class BlogCategoryRepository extends CoreRepository
 
         $model->save();
 
-        return $model;
+        $converted = $this->convertToArray($model);
+
+        return $converted;
     }
 
     public function destroy($id)
     {
-        return $this->startConditions()->delete($id);
+        return $this->startConditions()->find($id)->delete();
     }
 }
