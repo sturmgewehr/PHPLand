@@ -32,4 +32,6 @@ abstract class CoreRepository
     abstract public function destroy($id);
 
     abstract protected function convertToArray($model);
+
+    abstract protected function convertPaginatedToArray($items, $perPage);
 }
