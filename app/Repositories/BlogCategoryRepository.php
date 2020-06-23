@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\BlogCategory;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
  * Class BlogCategoryRepository.
@@ -26,6 +27,23 @@ class BlogCategoryRepository extends CoreRepository
         $category = $model->toArray();
 
         return compact('category', 'parent');
+    }
+
+    protected function convertPaginatedToArray($items, $perPage)
+    {
+        $converted = [];
+        foreach($items as $item)
+        {
+            $converted[] = $this->convertToArray($item);
+        }
+
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+        $currentConvertedItems = array_slice($converted, $perPage * ($currentPage - 1), $perPage);
+
+        $paginator = new LengthAwarePaginator($currentConvertedItems, count($converted), $perPage,
+            LengthAwarePaginator::resolveCurrentPage(), ['path' => LengthAwarePaginator::resolveCurrentPath()]);
+        return $paginator;
     }
 
     public function getEdit($id)
@@ -56,9 +74,11 @@ class BlogCategoryRepository extends CoreRepository
         $result = $this->startConditions()
             ->select($columns)
             ->with(['parent:id,title'])
-            ->paginate($perPage);
+            ->get();
 
-        return $result;
+        $paginator = $this->convertPaginatedToArray($result, $perPage);
+
+        return $paginator;
     }
 
     public function create(array $input)
