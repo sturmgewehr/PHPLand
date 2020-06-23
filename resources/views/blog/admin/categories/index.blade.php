@@ -21,12 +21,12 @@
                             <tbody>
                                 @foreach ($paginator as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item['category']['id'] }}</td>
                                         <td>
-                                            <a href="{{ route('blog.admin.categories.edit', $item->id) }}">{{ $item->title }}</a>
+                                            <a href="{{ route('blog.admin.categories.edit', $item['category']['id']) }}">{{ $item['category']['title'] }}</a>
                                         </td>
-                                        <td @if (in_array($item->parent_id, [0, 1])) style="color: #ccc" @endif>
-                                            {{ $item->parentTitle }}
+                                        <td @if (in_array($item['category']['parent_id'], [0, 1])) style="color: #ccc" @endif>
+                                            {{ $item['parent']['title'] ?? 'Корень'  }}
                                         </td>
                                     </tr>
                                 @endforeach
