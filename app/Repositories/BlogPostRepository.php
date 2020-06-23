@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\BlogPost;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
  * Class BlogPostRepository.
@@ -27,6 +28,23 @@ class BlogPostRepository extends CoreRepository
         return compact('post', 'user', 'category');
     }
 
+    protected function convertPaginatedToArray($items, $perPage)
+    {
+        $converted = [];
+        foreach($items as $item)
+        {
+            $converted[] = $this->convertToArray($item);
+        }
+
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+        $currentConvertedItems = array_slice($converted, $perPage * ($currentPage - 1), $perPage);
+
+        $paginator = new LengthAwarePaginator($currentConvertedItems, count($converted), $perPage,
+            LengthAwarePaginator::resolveCurrentPage(), ['path' => LengthAwarePaginator::resolveCurrentPath()]);
+        return $paginator;
+    }
+
     public function getAllWithPaginate($perPage = null)
     {
         $columns = [
@@ -45,9 +63,11 @@ class BlogPostRepository extends CoreRepository
             ->with([
                 'category:id,title',
                 'user:id,name',
-            ])->paginate($perPage);
+            ])->get();
 
-        return $result;
+        $paginator = $this->convertPaginatedToArray($result, $perPage);
+
+        return $paginator;
     }
 
     public function getEdit($id)
@@ -78,9 +98,11 @@ class BlogPostRepository extends CoreRepository
             ->with([
                 'category:id,title',
                 'user:id,name',
-            ])->paginate($perPage);
+            ])->get();
 
-        return $result;
+        $paginator = $this->convertPaginatedToArray($result, $perPage);
+
+        return $paginator;
     }
 
     public function create(array $input)
