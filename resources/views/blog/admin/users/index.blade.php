@@ -18,16 +18,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($paginator as $user)
+                                @foreach($paginator as $item)
                                     <tr
-                                        @if($user->is_admin) style="background-color: rgba(43,153,95,0.42)" @endif
-                                        @if($user->is_banned) style="background-color: #ccc" @endif
+                                        @if($item['user']['is_admin']) style="background-color: rgba(43,153,95,0.42)" @endif
+                                        @if($item['user']['is_banned']) style="background-color: #ccc" @endif
                                     >
-                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $item['user']['id'] }}</td>
                                         <td>
-                                            <a href="{{ route('blog.admin.users.edit', $user->id) }}">{{ $user->name }}</a>
+                                            <a href="{{ route('blog.admin.users.edit', $item['user']['id']) }}">{{ $item['user']['name'] }}</a>
                                         </td>
-                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $item['user']['email'] }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
