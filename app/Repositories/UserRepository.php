@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\User;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
  * Class UserRepository.
@@ -23,6 +24,23 @@ class UserRepository extends CoreRepository
         $userRole = $model->userRole;
         $user = $model->toArray();
         return compact('user', 'userRole');
+    }
+
+    protected function convertPaginatedToArray($items, $perPage)
+    {
+        $converted = [];
+        foreach($items as $item)
+        {
+            $converted[] = $this->convertToArray($item);
+        }
+
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+        $currentConvertedItems = array_slice($converted, $perPage * ($currentPage - 1), $perPage);
+
+        $paginator = new LengthAwarePaginator($currentConvertedItems, count($converted), $perPage,
+            LengthAwarePaginator::resolveCurrentPage(), ['path' => LengthAwarePaginator::resolveCurrentPath()]);
+        return $paginator;
     }
 
     public function getEdit($id)
@@ -47,9 +65,11 @@ class UserRepository extends CoreRepository
         $result = $this->startConditions()
             ->select($columns)
             ->orderBy('id', 'DESC')
-            ->paginate($perPage);
+            ->get();
 
-        return $result;
+        $paginator = $this->convertPaginatedToArray($result, $perPage);
+
+        return $paginator;
     }
 
     public function create(array $input)
