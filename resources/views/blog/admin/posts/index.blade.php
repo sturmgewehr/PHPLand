@@ -23,15 +23,15 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($paginator as $post)
-                                <tr @if (!$post->is_published) style="background-color: #ccc" @endif>
-                                    <td>{{ $post->id }}</td>
-                                    <td>{{ $post->user->name }}</td>
-                                    <td>{{ $post->category->title }}</td>
+                            @foreach ($paginator as $item)
+                                <tr @if (!$item['post']['is_published']) style="background-color: #ccc" @endif>
+                                    <td>{{ $item['post']['id'] }}</td>
+                                    <td>{{ $item['user']['name'] }}</td>
+                                    <td>{{ $item['category']['title'] }}</td>
                                     <td>
-                                        <a href="{{ route('blog.admin.posts.edit', $post->id) }}">{{ $post->title }}</a>
+                                        <a href="{{ route('blog.admin.posts.edit', $item['post']['id']) }}">{{ $item['post']['title'] }}</a>
                                     </td>
-                                    <td>{{ $post->published_at ? Carbon\Carbon::parse($post->published_at)->format('d.m.Y H:i') : '' }}</td>
+                                    <td>{{ $item['post']['published_at'] ? Carbon\Carbon::parse($item['post']['published_at'])->format('d.m.Y H:i') : '' }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
