@@ -63,3 +63,7 @@ fabric.properties
 # modules.xml
 # .idea/misc.xml
 # *.ipr
+
+#my ignores
+.idea
+.phpintel
