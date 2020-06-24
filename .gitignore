@@ -65,5 +65,5 @@ fabric.properties
 # *.ipr
 
 #my ignores
-.idea
-.phpintel
+.idea/
+.phpintel/
