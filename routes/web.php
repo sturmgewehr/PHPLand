@@ -27,6 +27,7 @@ Route::group(['prefix' => 'admin/blog', 'namespace' => 'Blog\Admin', 'middleware
         ->names('blog.admin.posts');
 
     Route::resource('users', 'UserController')
+        ->except(['create', 'store', 'show'])
         ->names('blog.admin.users');
 });
 
@@ -49,10 +50,16 @@ Route::group(['prefix' => 'blog', 'namespace' => 'Blog'], function () {
     Route::resource('posts', 'PostController')
         ->only(['show', 'index'])
         ->names('blog.posts');
+});
 
-//
+Route::group(['middleware' => 'auth', 'namespace' => 'Auth'], function () {
+    Route::resource('profile', 'ProfileController')
+        ->except(['create', 'store', 'show'])
+        ->names('profile');
 });
 
 Auth::routes();
 
+
 Route::get('/home', 'HomeController@index')->name('home');
+
