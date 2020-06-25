@@ -8,7 +8,10 @@
                             <a class="nav-link simple-link" href="">{{ $item['user']['name'] }}</a>
                         </div>
                         <div class="col-md-6 col-lg-6">
-                            <a class="nav-link simple-link article-bottom-span float-right" href="{{ route('blog.posts.edit', $item['post']['id']) }}">Редактировать</a>
+                            @if(Auth::id() === $item['user']['id'])
+                                <a class="nav-link simple-link article-bottom-span float-right"
+                                   href="{{ route('blog.posts.edit', $item['post']['id']) }}">Редактировать</a>
+                            @endif
                         </div>
                     </div>
                     <h2 class="simple-header">{{ $item['post']['title'] }}</h2>
