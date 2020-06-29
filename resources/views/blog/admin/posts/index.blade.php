@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-11">
 
-                @include('blog.admin.includes.display_action_status')
+                @include('blog.includes.display_action_status')
 
                 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
                     <a class="btn btn-primary" href="{{ route('blog.admin.posts.create') }}">Написать</a>

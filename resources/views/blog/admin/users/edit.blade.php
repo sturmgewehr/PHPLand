@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        @include('blog.admin.includes.display_action_status')
+        @include('blog.includes.display_action_status')
         <form action="{{ route('blog.admin.users.update', $item['user']['id']) }}" method="POST">
             @method('PATCH')
             @csrf

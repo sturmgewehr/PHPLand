@@ -6,7 +6,7 @@
             @method('PATCH')
             @csrf
             <div class="container">
-                @include('blog.admin.includes.display_action_status')
+                @include('blog.includes.display_action_status')
 
                 <div class="row justify-content-center">
                     <div class="col-md-7">

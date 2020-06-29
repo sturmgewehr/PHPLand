@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                @include('blog.admin.includes.display_action_status')
+                @include('blog.includes.display_action_status')
                 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
                     <a class="btn btn-outline-primary" href="{{ route('blog.admin.categories.create') }}">Добавить</a>
                 </nav>
