@@ -3,11 +3,22 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\UserUpdateRequest;
+use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+    /**
+     * @var UserService
+     */
+    private $userService;
+
+    public function __construct()
+    {
+        $this->userService = app(UserService::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,8 +38,9 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        dd(__METHOD__);
-
+        $item = $this->userService->getEdit($id);
+//        dd($item);
+        return view('blog.profiles.edit', compact('item'));
     }
 
     /**
@@ -38,10 +50,24 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
-        dd(__METHOD__);
+        $data = $request->input();
 
+//        Here can't update user password.
+//        Need to change user data changing
+//        (for password as example need to create ChangeUserPasswordController)
+        $item = $this->userService->update($id, $data);
+
+        if($item)
+        {
+            return redirect()->route('profile.edit', $item['user']['id'])
+                ->with(['success' => 'Успешно сохранено']);
+        } else
+        {
+            return back()->withErrors(['msg' => 'Ошибка сохранения'])
+                ->withInput();
+        }
     }
 
     /**
