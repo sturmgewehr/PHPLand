@@ -56,6 +56,8 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Auth'], function () {
     Route::resource('profile', 'ProfileController')
         ->except(['create', 'store', 'show'])
         ->names('profile');
+
+    Route::post('/profile.update-password', 'UpdatePasswordController@updatePassword')->name('profile.update_password');
 });
 
 Auth::routes();
