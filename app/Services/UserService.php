@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Hash;
 
 class UserService extends BaseService
 {
@@ -61,5 +62,10 @@ class UserService extends BaseService
     public function destroy($id)
     {
         return $this->repository->destroy($id);
+    }
+
+    public function changePassword(array $passwords)
+    {
+        return $this->repository->changePassword($passwords);
     }
 }

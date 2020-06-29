@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\User;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Class UserRepository.
@@ -99,5 +101,21 @@ class UserRepository extends CoreRepository
     public function destroy($id)
     {
         return $this->startConditions()->find($id)->delete();
+    }
+
+    public function changePassword(array $passwords)
+    {
+        $user = $this->startConditions()->find(Auth::id());
+        $hashedPassword = $user->password;
+
+        if(Hash::check($passwords['old'], $hashedPassword))
+        {
+            $user->fill([
+                'password' => Hash::make($passwords['password'])
+            ])->save();
+
+            return true;
+        }
+        return false;
     }
 }
