@@ -30,6 +30,13 @@ class ProfileController extends Controller
         return view('blog.profiles.index', compact('user'));
     }
 
+
+    public function show($id)
+    {
+        $user = $this->userService->getEdit($id);
+        return view('blog.profiles.index', compact('user'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
