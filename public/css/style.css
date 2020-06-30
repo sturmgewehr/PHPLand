@@ -49,16 +49,25 @@ footer.custom-bg-dark
 .simple-link:hover {
     color: #2f8cb8;
 }
+
+/*size for text*/
 .char-lg-size {
     font-size: 1.5em;
 }
 
+/* footer custom*/
 footer {
     box-shadow: 0 -5px 10px rgba(0, 0, 0, .5);
 }
 
 .footer-top-border {
     border-top: 5px solid #000;
+}
+
+/* layouts.app main wrapper */
+.main-wrapper {
+    margin-bottom: 2em;
+    margin-top: 2em;
 }
 
 /*Custom class for avatar display*/

@@ -25,7 +25,9 @@
         @include('partials.navbar')
 
         <main class="py-4">
-            @yield('content')
+            <div class="main-wrapper">
+                @yield('content')
+            </div>
         </main>
 
         @include('partials.footer')
