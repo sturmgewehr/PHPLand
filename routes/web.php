@@ -58,6 +58,11 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Auth'], function () {
         ->names('profile');
 
     Route::post('/profile.update-password', 'UpdatePasswordController@updatePassword')->name('profile.update_password');
+
+    // ! Auth\Admin controller
+    Route::get('/profile.admin-panel', 'Admin\AdminPanelController@index')
+        ->middleware('admin')
+        ->name('profile.admin_panel');
 });
 
 Auth::routes();
