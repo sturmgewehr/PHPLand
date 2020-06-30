@@ -20,21 +20,15 @@ class ProfileController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display the specified resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $user = Auth::user()->toArray();
-        return view('blog.profiles.index', compact('user'));
-    }
-
-
     public function show($id)
     {
         $user = $this->userService->getEdit($id);
-        return view('blog.profiles.index', compact('user'));
+        return view('blog.profiles.show', compact('user'));
     }
 
     /**

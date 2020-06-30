@@ -5,10 +5,10 @@
                 <div>
                     <div class="row">
                         <div class="col-md-6 col-lg-6">
-                            <a class="nav-link simple-link" href="">{{ $item['user']['name'] }}</a>
+                            <a class="nav-link simple-link" href="{{ route('profile.show', $item['user']['id']) }}">{{ $item['user']['name'] }}</a>
                         </div>
                         <div class="col-md-6 col-lg-6">
-                            @if(Auth::id() === $item['user']['id'])
+                            @if(\Illuminate\Support\Facades\Auth::id() === $item['user']['id'])
                                 <a class="nav-link simple-link article-bottom-span float-right"
                                    href="{{ route('blog.posts.edit', $item['post']['id']) }}">Редактировать</a>
                             @endif

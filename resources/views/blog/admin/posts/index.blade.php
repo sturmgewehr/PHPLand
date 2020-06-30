@@ -7,9 +7,6 @@
 
                 @include('blog.includes.display_action_status')
 
-                <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-                    <a class="btn btn-primary" href="{{ route('blog.admin.posts.create') }}">Написать</a>
-                </nav>
                 <div class="card">
                     <div class="card-body">
                         <table class="table table-hover">
