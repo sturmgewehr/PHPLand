@@ -3,6 +3,15 @@
 @section('content')
     <div class="container">
         @include('blog.includes.display_action_status')
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-6 col-sm-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h3>Настройки профиля</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
 {{--Change login and email--}}
         <form method="POST" action="{{ route('profile.update', $item['user']['id']) }}">
             @method('PATCH')
