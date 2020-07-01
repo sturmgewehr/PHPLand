@@ -82,7 +82,7 @@ class ProfileController extends Controller
         $result = $this->userService->destroy($id);
         if($result)
         {
-            return redirect('/');
+            return redirect('/')->with(['success' => 'Пользователь успешно удален']);
         } else
         {
             return back()->withErrors(['msg' => 'Ошибка удаления профиля']);

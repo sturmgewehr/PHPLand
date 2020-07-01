@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 //Admin routes
 Route::group(['prefix' => 'admin/blog', 'namespace' => 'Blog\Admin', 'middleware' => 'admin'], function () {
@@ -74,5 +74,5 @@ Route::group(['namespace' => 'Auth\Admin', 'middleware' => ['auth', 'admin']], f
 Auth::routes();
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
