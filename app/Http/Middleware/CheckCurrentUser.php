@@ -17,7 +17,9 @@ class CheckCurrentUser
      */
     public function handle($request, Closure $next)
     {
-        $showed_user = $request->segments()[1];
+        define('USER_ID_POSITION', 1);
+
+        $showed_user = $request->segments()[USER_ID_POSITION];
 
         if(Auth::id() == $showed_user)
         {

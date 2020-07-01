@@ -91,8 +91,6 @@ class PostController extends BaseController
 
         $categoryList = $this->blogCategoryService->getForComboBox();
 
-        Cookie::queue('users_article', $item['user']['id'], 15);
-
         return view('blog.posts.show', compact(['item', 'categoryList']));
     }
 
