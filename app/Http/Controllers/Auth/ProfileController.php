@@ -79,7 +79,13 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        dd(__METHOD__);
-
+        $result = $this->userService->destroy($id);
+        if($result)
+        {
+            return redirect('/');
+        } else
+        {
+            return back()->withErrors(['msg' => 'Ошибка удаления профиля']);
+        }
     }
 }

@@ -66,7 +66,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Auth'], function () {
 
 });
 
-Route::group(['namespace' => 'Auth\Admin', 'middleware' => 'auth,admin'], function () {
+Route::group(['namespace' => 'Auth\Admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/profile.admin-panel', 'AdminPanelController@index')
         ->name('profile.admin_panel');
 });
