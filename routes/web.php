@@ -54,14 +54,20 @@ Route::group(['prefix' => 'blog', 'namespace' => 'Blog'], function () {
 
 Route::group(['middleware' => 'auth', 'namespace' => 'Auth'], function () {
     Route::resource('profile', 'ProfileController')
-        ->except(['create', 'store', 'index'])
+        ->only(['show'])
+        ->names('profile');
+
+    Route::resource('profile', 'ProfileController')
+        ->only(['edit', 'update', 'destroy'])
+        ->middleware('check.user')
         ->names('profile');
 
     Route::post('/profile.update-password', 'UpdatePasswordController@updatePassword')->name('profile.update_password');
 
-    // ! Auth\Admin controller
-    Route::get('/profile.admin-panel', 'Admin\AdminPanelController@index')
-        ->middleware('admin')
+});
+
+Route::group(['namespace' => 'Auth\Admin', 'middleware' => 'auth,admin'], function () {
+    Route::get('/profile.admin-panel', 'AdminPanelController@index')
         ->name('profile.admin_panel');
 });
 
