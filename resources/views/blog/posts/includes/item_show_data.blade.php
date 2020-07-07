@@ -18,7 +18,7 @@
                     <a class="nav-link simple-link" href="">{{ $item['category']['title'] }}</a>
                 </div>
                 <div class="text-justify article-content">
-                        {{ $item['post']['content_html'] }}
+                        {!! htmlspecialchars_decode( $item['post']['content_html'] ) !!}
                 </div>
             </div>
         </div>
