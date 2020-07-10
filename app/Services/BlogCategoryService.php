@@ -9,7 +9,7 @@ use App\Repositories\BlogCategoryRepository;
 class BlogCategoryService extends BaseService
 {
     /**
-     * @var BlogCategoryService
+     * @var BlogCategoryRepository
      */
     private $repository;
 
