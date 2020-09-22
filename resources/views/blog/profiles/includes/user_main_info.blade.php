@@ -2,7 +2,12 @@
     <div class="col-md-12">
         <div class="card">
             <div class="">
-                <img class="card-img " src="{{ asset('images/1072133.png') }}" >
+                <img class="card-img " src="
+                @if($user['user']['is_admin'])
+                {{ asset('images/Admin.png') }}
+                @else
+                {{ asset('images/User.png') }}
+                @endif">
             </div>
             <div class="card-body">
                 <h2>{{ $user['user']['name'] }}</h2>
