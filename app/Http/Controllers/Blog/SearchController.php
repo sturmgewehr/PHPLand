@@ -36,13 +36,26 @@ class SearchController extends BaseController
 
     public function index($condition = null, $value = null)
     {
+        $condition = $_GET['condition'] ?? $condition;
+        $value = $_GET['value'] ?? $value;
+
         if ($condition && $value)
         {
             $paginator = $this->blogPostService->getByCondition($condition, $value, 20);
         } else
         {
-            $paginator = 'Error';
+            $paginator = null;
         }
-        return view('blog.search.index', compact('paginator'));
+        return view('blog.search.index', compact(['paginator', 'value']));
+    }
+
+    public function userSearch()
+    {
+        
+    }
+
+    public function categorySearch()
+    {
+        
     }
 }
