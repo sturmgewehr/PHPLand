@@ -63,6 +63,11 @@ class BlogPostService extends BaseService
         return $this->repository->getAllPublishedWithPaginate($perPage);
     }
 
+    public function getByCondition($condition = null, $value = null, $perPage = null)
+    {
+        return $this->repository->getByCondition($condition, $value, $perPage);
+    }
+
     public function destroy($id)
     {
         return $this->repository->destroy($id);

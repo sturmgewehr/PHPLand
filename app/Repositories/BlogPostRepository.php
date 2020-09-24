@@ -105,6 +105,32 @@ class BlogPostRepository extends CoreRepository
         return $paginator;
     }
 
+    public function getByCondition($condition = null, $value = null, $perPage = null)
+    {
+        $columns = [
+            'id',
+            'title',
+            'user_id',
+            'category_id',
+            'published_at',
+            'is_published',
+            'excerpt',
+        ];
+
+        $result = $this->startConditions()
+            ->select($columns)
+            ->where(['is_published' => 1, $condition => $value])
+            ->orderBy('id', 'DESC')
+            ->with([
+                'category:id,title',
+                'user:id,name',
+            ])->get();
+
+        $paginator = $this->convertPaginatedToArray($result, $perPage);
+
+        return $paginator;
+    }
+
     public function create(array $input)
     {
         $model = $this->startConditions();
