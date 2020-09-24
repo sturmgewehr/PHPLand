@@ -50,6 +50,9 @@ Route::group(['prefix' => 'blog', 'namespace' => 'Blog'], function () {
     Route::resource('posts', 'PostController')
         ->only(['show', 'index'])
         ->names('blog.posts');
+
+    Route::get('search/{condition?}/{value?}', 'SearchController@index')
+        ->name('search_route');
 });
 
 Route::group(['middleware' => 'auth', 'namespace' => 'Auth'], function () {
