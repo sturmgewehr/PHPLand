@@ -28,8 +28,6 @@
 @section('content')
     <div class="container-fluid">
         @include('blog.includes.display_action_status')
-        <div class="dummy">
-
-        </div>
+        @include('partials.start_site_block')
     </div>
 @endsection

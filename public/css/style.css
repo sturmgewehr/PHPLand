@@ -83,3 +83,6 @@ footer {
 	background-color: #7F7F7F;
 	height: 2000px;
 }
+.custom-block {
+    border-radius: 10px;
+}
