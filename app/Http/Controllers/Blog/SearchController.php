@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
-use App\Services\BlogCategoryService;
 use App\Services\BlogPostService;
-use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class SearchController extends BaseController
@@ -28,10 +26,6 @@ class SearchController extends BaseController
     public function __construct()
     {
         $this->blogPostService = app(BlogPostService::class);
-
-        $this->blogCategoryService = app(BlogCategoryService::class);
-
-        $this->userService = app(UserService::class);
     }
 
     public function index($condition = null, $value = null)
@@ -47,15 +41,5 @@ class SearchController extends BaseController
             $paginator = null;
         }
         return view('blog.search.index', compact(['paginator', 'value']));
-    }
-
-    public function userSearch()
-    {
-        
-    }
-
-    public function categorySearch()
-    {
-        
     }
 }
